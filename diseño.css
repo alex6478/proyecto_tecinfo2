@@ -1,0 +1,100 @@
+body {
+    background-color: #FFDB58; /* Amarillo mostaza */
+    color: #333; /* Un color de texto oscuro para contrastar */
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #E0C068; /* Un tono más oscuro del amarillo mostaza para el header */
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: #333; /* Color de texto oscuro para los enlaces */
+    text-decoration: none;
+    font-weight: bold; /* Opcional: hacer los enlaces más visibles */
+}
+
+.portada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.portada h1 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #333; /* Color del título */
+}
+
+.imagen-portada {
+    max-width: 300px; /* Ajusta el tamaño según necesites */
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 8px; /* Opcional: para bordes redondeados */
+    border: 2px solid #E0C068; /* Opcional: un borde a juego con el header */
+}
+
+.informacion {
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente blanco para la información */
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    color: #333; /* Color del texto de la información */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Opcional: una ligera sombra */
+}
+
+.informacion h2 {
+    margin-top: 0;
+    color: #333; /* Color del subtítulo */
+}
+
+.informacion ul {
+    list-style: none;
+    padding: 0;
+}
+
+.informacion li {
+    margin-bottom: 5px;
+}
+
+.informacion strong {
+    color: #007bff; /* Un color destacado para el texto importante */
+}
+
+#miBoton {
+    background-color: #007bff; /* Un azul para el botón que contraste */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Opcional: sombra para el botón */
+}
+
+#miBoton:hover {
+    background-color: #0056b3;
+}
+
+header marquee {
+    background-color: #C0A040; /* Un tono diferente para la marquesina */
+    color: white;
+    padding: 8px 0;
+}
