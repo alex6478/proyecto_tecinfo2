@@ -3,94 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hambre Cero: Videos Informativos</title>
+    <title>Hambre Cero: Creando Videos Informativos</title>
     <link rel="stylesheet" href="contenido.css">
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght=400;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="main-header">
         <div class="container">
-            <h1>Hambre Cero: Entendiendo la Crisis Global</h1>
-            <p>Explora nuestra colección de videos informativos sobre las condiciones actuales del hambre en el mundo y cómo podemos actuar.</p>
+            <h1 class="logo">Hambre Cero</h1>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#introduccion">Introducción</a></li>
+                    <li><a href="#datos-actuales">Datos Actuales</a></li>
+                    <li><a href="#soluciones">Soluciones</a></li>
+                    <li><a href="#crear-video">Crea tu Video</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <section id="video-gallery" class="content-section active">
-            <h2>Videos Clave sobre la Inseguridad Alimentaria</h2>
-            <div class="video-grid">
-                <article class="video-card" data-video-id="nJ86W4EwYJg"> <div class="video-thumbnail">
-                        <img src="https://img.youtube.com/vi/nJ86W4EwYJg/hqdefault.jpg" alt="Thumbnail: Causas del Hambre">
-                        <div class="play-overlay"><i class="fas fa-play"></i></div>
-                    </div>
-                    <h3>Las Raíces del Hambre: Más Allá de la Escasez</h3>
-                    <p>Un análisis profundo sobre los factores estructurales y sistémicos que perpetúan la inseguridad alimentaria a nivel global, desde conflictos hasta el cambio climático.</p>
-                    <div class="card-actions">
-                        <button class="watch-video-btn"><i class="fas fa-eye"></i> Ver Video</button>
-                        <button class="share-btn" data-title="Las Raíces del Hambre" data-url="https://www.youtube.com/watch?v=nJ86W4EwYJg"><i class="fas fa-share-alt"></i> Compartir</button>
-                    </div>
-                </article>
-
-                <article class="video-card" data-video-id="qE_8z3gA9yQ"> <div class="video-thumbnail">
-                        <img src="https://img.youtube.com/vi/qE_8z3gA9yQ/hqdefault.jpg" alt="Thumbnail: Impacto en la Salud">
-                        <div class="play-overlay"><i class="fas fa-play"></i></div>
-                    </div>
-                    <h3>Hambre Oculta: Consecuencias en Niños y Comunidades</h3>
-                    <p>Este video explora el impacto devastador de la desnutrición crónica y aguda en el desarrollo físico y cognitivo, especialmente en la infancia.</p>
-                    <div class="card-actions">
-                        <button class="watch-video-btn"><i class="fas fa-eye"></i> Ver Video</button>
-                        <button class="share-btn" data-title="Hambre Oculta" data-url="https://www.youtube.com/watch?v=qE_8z3gA9yQ"><i class="fas fa-share-alt"></i> Compartir</button>
-                    </div>
-                </article>
-
-                <article class="video-card" data-video-id="X3bA_H4P-uE"> <div class="video-thumbnail">
-                        <img src="https://img.youtube.com/vi/X3bA_H4P-uE/hqdefault.jpg" alt="Thumbnail: Soluciones">
-                        <div class="play-overlay"><i class="fas fa-play"></i></div>
-                    </div>
-                    <h3>De la Crisis a la Solución: Proyectos que Funcionan</h3>
-                    <p>Historias inspiradoras de iniciativas y proyectos innovadores que están marcando la diferencia en la lucha contra el hambre en diversas regiones.</p>
-                    <div class="card-actions">
-                        <button class="watch-video-btn"><i class="fas fa-eye"></i> Ver Video</button>
-                        <button class="share-btn" data-title="Proyectos que Funcionan" data-url="https://www.youtube.com/watch?v=X3bA_H4P-uE"><i class="fas fa-share-alt"></i> Compartir</button>
-                    </div>
-                </article>
-
-                <article class="video-card" data-video-id="z-0u5p5b_YI"> <div class="video-thumbnail">
-                        <img src="https://img.youtube.com/vi/z-0u5p5b_YI/hqdefault.jpg" alt="Thumbnail: Desperdicio Alimentario">
-                        <div class="play-overlay"><i class="fas fa-play"></i></div>
-                    </div>
-                    <h3>El Gran Desperdicio: Cómo Afecta al Hambre Global</h3>
-                    <p>Descubre el impacto del desperdicio de alimentos a lo largo de la cadena de suministro y qué podemos hacer como individuos y comunidades para reducirlo.</p>
-                    <div class="card-actions">
-                        <button class="watch-video-btn"><i class="fas fa-eye"></i> Ver Video</button>
-                        <button class="share-btn" data-title="El Gran Desperdicio" data-url="https://www.youtube.com/watch?v=z-0u5p5b_YI"><i class="fas fa-share-alt"></i> Compartir</button>
-                    </div>
-                </article>
-                </div>
-            <div class="call-to-action">
-                <p>¿Quieres profundizar y actuar?</p>
-                <button class="dynamic-btn" onclick="window.open('https://www.wfp.org/es/hambre-cero', '_blank')"><i class="fas fa-globe"></i> Visita el PMA</button>
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="hero-content">
+                <h2>Erradicar el Hambre en el Mundo</h2>
+                <p>Únete a la iniciativa Hambre Cero y ayuda a crear conciencia a través de videos impactantes.</p>
+                <button class="btn primary-btn" id="explore-btn">Explorar Datos</button>
             </div>
         </section>
 
-        <section id="modal-video" class="modal">
-            <div class="modal-content">
-                <span class="close-button">×</span>
-                <div class="video-player-container">
+        <section id="introduccion" class="info-section">
+            <div class="container">
+                <h3>La Urgencia del Hambre Cero</h3>
+                <p>El hambre es una crisis global que afecta a millones de personas. Como parte de los Objetivos de Desarrollo Sostenible de la ONU, Hambre Cero busca poner fin al hambre, lograr la seguridad alimentaria, mejorar la nutrición y promover la agricultura sostenible para 2030.</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h4>Millones Afectados</h4>
+                        <p id="affected-millions">Cargando...</p>
                     </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <p>&copy; 2025 Hambre Cero. Información y Conciencia.</p>
-            <p>Juntos por un mundo sin hambre.</p>
-        </div>
-    </footer>
-
-    <script src="contenido.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
-</html>
+                    <div class="stat-card">
+                        <h4>Niños con Malnutrición</h4>
+                        <p id="malnourished-children">Cargando...</p>
+                    </div>
+                    <div class="stat-card">
+                        <h4>Impacto Econ
