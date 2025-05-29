@@ -1,124 +1,157 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const videoCards = document.querySelectorAll('.video-card');
-    const modal = document.getElementById('modal-video');
-    const closeButton = document.querySelector('.close-button');
-    const videoPlayerContainer = document.querySelector('.video-player-container');
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('.main-nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
 
-    // 1. Handle Modal for Video Playback
-    videoCards.forEach(card => {
-        const videoId = card.dataset.videoId;
-        const watchButton = card.querySelector('.watch-video-btn');
-        const playOverlay = card.querySelector('.play-overlay');
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
 
-        const openModal = () => {
-            if (videoId) {
-                const iframe = document.createElement('iframe');
-                iframe.setAttribute('src', `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`);
-                iframe.setAttribute('frameborder', '0');
-                iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-                iframe.setAttribute('allowfullscreen', '');
-                videoPlayerContainer.innerHTML = ''; // Clear any previous video
-                videoPlayerContainer.appendChild(iframe);
-                modal.style.display = 'flex'; // Use flex for centering
-            } else {
-                console.error('No video ID found for this card.');
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error al cargar video',
-                    text: 'Lo sentimos, no pudimos cargar este video en este momento.',
-                    confirmButtonColor: '#6a994e'
+            // Optional: Update active link class
+            document.querySelectorAll('.main-nav a').forEach(link => link.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+
+    // Initial active link for the current section on load (optional)
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.main-nav a');
+
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${entry.target.id}`) {
+                        link.classList.add('active');
+                    }
                 });
             }
-        };
+        });
+    }, { threshold: 0.5 }); // Trigger when 50% of the section is visible
 
-        watchButton.addEventListener('click', openModal);
-        playOverlay.addEventListener('click', openModal);
+    sections.forEach(section => {
+        observer.observe(section);
     });
 
-    closeButton.addEventListener('click', () => {
+    // Dynamic "Explore Data" button on Hero section
+    const exploreBtn = document.getElementById('explore-btn');
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', () => {
+            document.querySelector('#introduccion').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // Simulate fetching dynamic statistics for "Introduccion" section
+    const affectedMillions = document.getElementById('affected-millions');
+    const malnourishedChildren = document.getElementById('malnourished-children');
+    const economicImpact = document.getElementById('economic-impact');
+
+    const updateStats = () => {
+        let currentAffected = 0;
+        let currentMalnourished = 0;
+        let currentEconomic = 0;
+
+        const targetAffected = 735; // Example: Millions
+        const targetMalnourished = 45; // Example: Millions
+        const targetEconomic = 3.5; // Example: Trillions
+
+        const duration = 2000; // milliseconds
+        const steps = 100;
+        let step = 0;
+
+        const interval = setInterval(() => {
+            step++;
+            currentAffected = (targetAffected / steps) * step;
+            currentMalnourished = (targetMalnourished / steps) * step;
+            currentEconomic = (targetEconomic / steps) * step;
+
+            if (affectedMillions) affectedMillions.textContent = `${Math.round(currentAffected)}M`;
+            if (malnourishedChildren) malnourishedChildren.textContent = `${Math.round(currentMalnourished)}M`;
+            if (economicImpact) economicImpact.textContent = `$${currentEconomic.toFixed(1)}T`;
+
+            if (step >= steps) {
+                clearInterval(interval);
+                if (affectedMillions) affectedMillions.textContent = `${targetAffected}M`;
+                if (malnourishedChildren) malnourishedChildren.textContent = `${targetMalnourished}M`;
+                if (economicImpact) economicImpact.textContent = `$${targetEconomic}T`;
+            }
+        }, duration / steps);
+    };
+
+    // Trigger stat update when the section is in view
+    const statsObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.dataset.animated) {
+                updateStats();
+                entry.target.dataset.animated = 'true'; // Mark as animated
+            }
+        });
+    }, { threshold: 0.5 }); // When 50% of the element is visible
+
+    const infoSection = document.getElementById('introduccion');
+    if (infoSection) {
+        statsObserver.observe(infoSection);
+    }
+
+    // Modal functionality for Data Cards
+    const modal = document.getElementById('modal');
+    const closeModalBtn = document.querySelector('.close-button');
+    const viewDetailsBtns = document.querySelectorAll('.view-details-btn');
+    const modalTitle = document.getElementById('modal-title');
+    const modalText = document.getElementById('modal-text');
+    const modalImage = document.getElementById('modal-image');
+
+    const regionData = {
+        'africa': {
+            title: 'África Subsahariana: Desafíos Críticos',
+            text: 'En África Subsahariana, la inseguridad alimentaria es endémica, exacerbada por conflictos, inestabilidad climática y pobreza extrema. Millones de personas, especialmente niños, sufren de desnutrición aguda y crónica. La falta de infraestructura, el acceso limitado a mercados y la dependencia de la agricultura de subsistencia contribuyen a la vulnerabilidad. Es fundamental invertir en resiliencia climática y programas de desarrollo sostenibles.',
+            image: 'https://via.placeholder.com/600x400?text=Mapa+Africa'
+        },
+        'asia': {
+            title: 'Asia Meridional: Paradoja del Crecimiento',
+            text: 'A pesar del rápido crecimiento económico en muchas partes de Asia Meridional, la región sigue albergando la mayor proporción de personas subalimentadas. La desigualdad de ingresos, el acceso limitado a servicios básicos y la vulnerabilidad a desastres naturales son factores clave. Los esfuerzos se centran en mejorar los sistemas de distribución de alimentos, la nutrición materna e infantil, y la educación sobre dietas saludables.',
+            image: 'https://via.placeholder.com/600x400?text=Mapa+Asia'
+        },
+        'latin-america': {
+            title: 'América Latina y el Caribe: Retrocesos Recientes',
+            text: 'Después de décadas de progreso, América Latina y el Caribe han visto un preocupante aumento en la subalimentación, impulsado por recesiones económicas, conflictos sociales y el impacto del cambio climático. Fenómenos extremos como sequías e inundaciones afectan la producción de alimentos y la seguridad hídrica. Las estrategias buscan fortalecer las redes de seguridad social, diversificar la producción agrícola y promover la adaptación al cambio climático.',
+            image: 'https://via.placeholder.com/600x400?text=Mapa+Latam'
+        }
+    };
+
+    viewDetailsBtns.forEach(button => {
+        button.addEventListener('click', () => {
+            const region = button.closest('.data-card').dataset.region;
+            const data = regionData[region];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalText.textContent = data.text;
+                modalImage.src = data.image;
+                modal.style.display = 'flex';
+            }
+        });
+    });
+
+    closeModalBtn.addEventListener('click', () => {
         modal.style.display = 'none';
-        videoPlayerContainer.innerHTML = ''; // Stop video on modal close
     });
 
-    // Close modal by clicking outside the content
+    // Close modal if clicked outside of modal content
     window.addEventListener('click', (event) => {
-        if (event.target === modal) {
+        if (event.target == modal) {
             modal.style.display = 'none';
-            videoPlayerContainer.innerHTML = ''; // Stop video on modal close
         }
     });
 
-    // 2. Share Functionality (Web Share API or fallback)
-    const shareButtons = document.querySelectorAll('.share-btn');
-
-    shareButtons.forEach(button => {
-        button.addEventListener('click', async () => {
-            const videoTitle = button.dataset.title;
-            const videoUrl = button.dataset.url;
-
-            if (navigator.share) {
-                // Use Web Share API if available
-                try {
-                    await navigator.share({
-                        title: videoTitle,
-                        url: videoUrl
-                    });
-                    console.log('Content shared successfully');
-                } catch (error) {
-                    console.error('Error sharing:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error al compartir',
-                        text: 'No se pudo compartir el contenido. Por favor, inténtalo de nuevo.',
-                        confirmButtonColor: '#6a994e'
-                    });
-                }
-            } else {
-                // Fallback for browsers that don't support Web Share API
-                // Offer to copy link to clipboard
-                navigator.clipboard.writeText(`${videoTitle}: ${videoUrl}`)
-                    .then(() => {
-                        Swal.fire({
-                            icon: 'success',
-                            title: '¡Enlace copiado!',
-                            text: 'El enlace del video ha sido copiado a tu portapapeles. ¡Ahora puedes compartirlo!',
-                            confirmButtonColor: '#6a994e'
-                        });
-                    })
-                    .catch(err => {
-                        console.error('Error copying link:', err);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error al copiar',
-                            text: 'No pudimos copiar el enlace automáticamente. Por favor, cópialo manualmente.',
-                            confirmButtonColor: '#6a994e'
-                        });
-                    });
-            }
+    // "Start Now" button in video creation section
+    const createVideoBtn = document.querySelector('.create-video-btn');
+    if (createVideoBtn) {
+        createVideoBtn.addEventListener('click', () => {
+            alert('¡Fantástico! Aquí podrías redirigir a una página de herramientas o recursos para la creación de videos.');
         });
-    });
-
-    // 3. Entrance Animation for Video Cards
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1 // When 10% of the element is visible
-    };
-
-    const cardObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-                entry.target.style.transform = 'translateY(0)';
-                observer.unobserve(entry.target); // Stop observing once it has appeared
-            }
-        });
-    }, observerOptions);
-
-    videoCards.forEach(card => {
-        card.style.opacity = 0; // Start invisible
-        card.style.transform = 'translateY(20px)'; // Slightly below
-        card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-        cardObserver.observe(card);
-    });
+    }
 });
